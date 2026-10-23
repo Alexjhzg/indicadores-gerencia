@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------
+   Halfhelix / Domaine Editorial Design Tokens via Tailwind CSS v4 Theme
+   Sistema de Indicadores de Gestión — INE Monagas (Entidad 16)
+------------------------------------------------------------------------- */
+@theme {
+  --color-pure-white: #ffffff;
+  --color-ink-black: #000000;
+  --color-carbon: #262626;
+  --color-graphite: #484a4c;
+  --color-steel: #424647;
+  --color-fog: #8e9192;
+  --color-ash: #d1d4d5;
+  --color-mist: #ededed;
+  --color-smoke: #6e7071;
+  --color-signal-blue: #2749ff;
+  --color-signal-blue-light: rgba(39, 73, 255, 0.08);
+
+  /* Identidad Cromática por Unidad de Estadística (Paleta Editorial INE) */
+  --color-dept-eco: #15803d;
+  --color-dept-eco-light: #f0fdf4;
+  --color-dept-eco-border: #bbf7d0;
+
+  --color-dept-soc: #1d4ed8;
+  --color-dept-soc-light: #eff6ff;
+  --color-dept-soc-border: #bfdbfe;
+
+  --color-dept-dem: #991b1b;
+  --color-dept-dem-light: #fef2f2;
+  --color-dept-dem-border: #fecaca;
+
+  --color-dept-cart: #b45309;
+  --color-dept-cart-light: #fffbeb;
+  --color-dept-cart-border: #fde68a;
+
+  --color-dept-seg: #4338ca;
+  --color-dept-seg-light: #eef2ff;
+  --color-dept-seg-border: #c7d2fe;
+
+  /* Tipografía Oficial */
+  --font-base: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Radios Geométricos de 3px */
+  --radius-sm: 3px;
+  --radius-card: 3px;
+  --radius-pill: 1440px;
+}
+
+/* Base HTML & Body */
+html, body {
+  background-color: #ffffff;
+  color: #000000;
+  font-family: var(--font-base);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.3;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Regla Invariante Domaine: Cero sombras en todo el ecosistema */
+*, *::before, *::after {
+  box-shadow: none !important;
+}

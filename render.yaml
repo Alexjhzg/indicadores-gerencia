@@ -1,0 +1,58 @@
+# ==============================================================================
+# BLUEPRINT DE DESPLIEGUE EN RENDER.COM
+# Sistema de Indicadores de Gestión - INE Gerencia Estadal Monagas
+# ==============================================================================
+
+databases:
+  # Base de Datos PostgreSQL Gestionada en Render
+  - name: ine-indicadores-db
+    databaseName: ine_indicadores_monagas
+    user: ine_admin
+    plan: free
+    region: oregon
+
+services:
+  # ============================================================================
+  # 1. SERVICIO WEB BACKEND (FastAPI + Uvicorn)
+  # ============================================================================
+  - type: web
+    name: ine-indicadores-backend
+    runtime: python
+    plan: free
+    region: oregon
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -m app.db.init_db && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DATABASE_URL
+        fromDatabase:
+          name: ine-indicadores-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: http://localhost:5173
+
+  # ============================================================================
+  # 2. SITIO ESTÁTICO FRONTEND (Vue 3 + Vite + Tailwind CSS)
+  # ============================================================================
+  - type: static
+    name: ine-indicadores-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: ine-indicadores-backend
+          property: host
