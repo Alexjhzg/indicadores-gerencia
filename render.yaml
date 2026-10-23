@@ -39,8 +39,9 @@ services:
   # ============================================================================
   # 2. SITIO ESTÁTICO FRONTEND (Vue 3 + Vite + Tailwind CSS)
   # ============================================================================
-  - type: static
+  - type: web
     name: ine-indicadores-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: ./dist
@@ -52,7 +53,4 @@ services:
       - key: NODE_VERSION
         value: 22
       - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: ine-indicadores-backend
-          property: host
+        value: https://ine-indicadores-backend.onrender.com
