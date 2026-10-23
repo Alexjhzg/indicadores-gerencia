@@ -127,17 +127,17 @@ Si prefieres crear los recursos manualmente desde la interfaz web de Render, sig
 
 Una vez completado el despliegue, podrás ingresar a la aplicación con los usuarios oficiales precargados en el sistema:
 
-| Rol | Cédula | Contraseña | Descripción |
-| :--- | :--- | :--- | :--- |
-| **Gerente Estadal** | `V-12345678` | `ine2026` | Acceso a todo el dashboard ejecutivo y supervisión general. |
-| **Jefe de Área** | `V-87654321` | `ine2026` | Supervisión de Cartografía, Económicas, Sociales y SEGEN. |
-| **Encargado ECO** | `V-11111111` | `ine2026` | Unidad de Estadísticas Económicas. |
-| **Encargado SOC** | `V-22222222` | `ine2026` | Unidad de Estadísticas Sociales. |
-| **Encargado DEM** | `V-33333333` | `ine2026` | Unidad de Estadísticas Demográficas. |
-| **Encargado CART**| `V-44444444` | `ine2026` | Unidad de Cartografía Estadística. |
-| **Encargado SEG** | `V-55555555` | `ine2026` | Unidad de Estructura y Encuestas SEGEN. |
-| **Encargado SEEM**| `V-66666666` | `ine2026` | Unidad de Seguimiento y Evaluación (SEEM). |
-| **Administrador** | `V-00000000` | `admin2026`| Acceso administrativo y de auditoría técnica. |
+| Rol | Cédula | Contraseña | Funcionario Responsable | Unidad Técnica |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gerente Estadal** | `V-11206771` | `gerente2026` | **Luis Alberto** | Gerencia Estadal Monagas (Acceso Total) |
+| **Jefe de Área** | `V-8979338` | `gerente2026` | **Jesús Ramón Pérez** | Supervisión (CART, ECO, SOC, SEG) |
+| **Jefe de Unidad** | `V-13814617` | `gerente2026` | **Wilfredo Rojas** | Estadísticas Económicas (ECO) |
+| **Jefe de Unidad** | `V-17934142` | `gerente2026` | **Rubén Alejandro** | Estadísticas Sociales (SOC) |
+| **Jefa de Unidad** | `V-11337533` | `gerente2026` | **Cledys Bastardo** | Demografía y Población (DEM) |
+| **Jefe de Unidad** | `V-10198032` | `gerente2026` | **Henri Guevara** | Cartografía Estadística (CART) |
+| **Jefa de Unidad** | `V-17723864` | `gerente2026` | **Johana Larez** | Estructura y Encuestas SEGEN (SEG) |
+| **Coordinador** | `V-20916675` | `gerente2026` | **Luis Velásquez** | Coordinación de SEEM (Seguimiento y Eval.) |
+| **Administrador** | `V-10000000` | `gerente2026` | **Administrador General** | Configuración Técnica y Auditoría |
 
 ---
 
