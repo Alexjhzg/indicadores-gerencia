@@ -5,19 +5,23 @@ from app.main import app
 client = TestClient(app)
 
 def test_login_variants():
-    # Login con y sin prefijo V-
-    res_with_v = client.post("/api/v1/auth/login", json={"cedula": "V-8979338", "password": "gerente2026"})
+    # Login con y sin prefijo V-, usando la cédula como contraseña
+    res_with_v = client.post("/api/v1/auth/login", json={"cedula": "V-8979338", "password": "V-8979338"})
     assert res_with_v.status_code == 200
     token1 = res_with_v.json()["access_token"]
     assert token1 is not None
 
-    res_without_v = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "gerente2026"})
+    res_without_v = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "8979338"})
     assert res_without_v.status_code == 200
     token2 = res_without_v.json()["access_token"]
     assert token2 is not None
 
+    # También admite contraseña numérica pura aunque la cédula se pase como V-
+    res_mixed = client.post("/api/v1/auth/login", json={"cedula": "V-8979338", "password": "8979338"})
+    assert res_mixed.status_code == 200
+
 def test_jesus_perez_profile_and_departments():
-    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "gerente2026"})
+    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "8979338"})
     token = res.json()["access_token"]
 
     res_me = client.get("/api/v1/auth/me", headers={"Authorization": f"Bearer {token}"})
@@ -33,7 +37,7 @@ def test_jesus_perez_profile_and_departments():
     assert "SEEM" not in data["departamentos_codigos"]
 
 def test_jesus_perez_permissions_allowed():
-    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "gerente2026"})
+    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "8979338"})
     token = res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -43,7 +47,7 @@ def test_jesus_perez_permissions_allowed():
         assert res_dept.status_code == 200, f"Error accediendo a {dept}: {res_dept.text}"
 
 def test_jesus_perez_forbidden_departments():
-    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "gerente2026"})
+    res = client.post("/api/v1/auth/login", json={"cedula": "8979338", "password": "8979338"})
     token = res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
 
@@ -55,7 +59,7 @@ def test_jesus_perez_forbidden_departments():
     assert res_seem.status_code == 403
 
 def test_gerente_luis_alberto_access_all():
-    res = client.post("/api/v1/auth/login", json={"cedula": "11206771", "password": "gerente2026"})
+    res = client.post("/api/v1/auth/login", json={"cedula": "11206771", "password": "11206771"})
     assert res.status_code == 200
     token = res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}
@@ -72,7 +76,7 @@ def test_gerente_luis_alberto_access_all():
 
 def test_encargado_single_unit_isolation():
     # Wilfredo Rojas (ECO: 13814617)
-    res = client.post("/api/v1/auth/login", json={"cedula": "13814617", "password": "gerente2026"})
+    res = client.post("/api/v1/auth/login", json={"cedula": "13814617", "password": "13814617"})
     assert res.status_code == 200
     token = res.json()["access_token"]
     headers = {"Authorization": f"Bearer {token}"}

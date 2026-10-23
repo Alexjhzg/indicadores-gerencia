@@ -64,16 +64,20 @@ def seed_database():
         roles = {r.nombre: r for r in db.query(Role).all()}
         
         # Administrador Técnico General
+        # Administrador Técnico General
         admin_user = db.query(User).filter(User.cedula == "V-10000000").first()
         if not admin_user:
             admin_user = User(
                 cedula="V-10000000",
                 nombre_completo="Administrador General INE",
-                password_hash=get_password_hash("gerente2026"),
+                password_hash=get_password_hash("10000000"),
                 rol_id=roles["ADMIN"].id,
                 departamento_id=None
             )
             db.add(admin_user)
+            db.flush()
+        else:
+            admin_user.password_hash = get_password_hash("10000000")
             db.flush()
 
         # 1. Gerente Estadal: Luis Alberto (V-11206771)
@@ -82,7 +86,7 @@ def seed_database():
             gerente_user = User(
                 cedula="V-11206771",
                 nombre_completo="Luis Alberto",
-                password_hash=get_password_hash("gerente2026"),
+                password_hash=get_password_hash("11206771"),
                 rol_id=roles["GERENTE"].id,
                 departamento_id=None
             )
@@ -92,7 +96,7 @@ def seed_database():
             gerente_user.nombre_completo = "Luis Alberto"
             gerente_user.rol_id = roles["GERENTE"].id
             gerente_user.departamento_id = None
-            gerente_user.password_hash = get_password_hash("gerente2026")
+            gerente_user.password_hash = get_password_hash("11206771")
             db.flush()
 
         # 2. Jefe de Área de Programas Estadísticos: Jesús Ramón Pérez (V-8979338)
@@ -102,7 +106,7 @@ def seed_database():
             jefe_area_user = User(
                 cedula="V-8979338",
                 nombre_completo="Jesús Ramón Pérez",
-                password_hash=get_password_hash("gerente2026"),
+                password_hash=get_password_hash("8979338"),
                 rol_id=roles["JEFE_AREA"].id,
                 departamento_id=depts["CART"].id
             )
@@ -112,7 +116,7 @@ def seed_database():
             jefe_area_user.nombre_completo = "Jesús Ramón Pérez"
             jefe_area_user.rol_id = roles["JEFE_AREA"].id
             jefe_area_user.departamento_id = depts["CART"].id
-            jefe_area_user.password_hash = get_password_hash("gerente2026")
+            jefe_area_user.password_hash = get_password_hash("8979338")
             db.flush()
 
         # Asignar explícitamente sus 4 departamentos supervisados: CART, ECO, SOC, SEG
@@ -132,12 +136,13 @@ def seed_database():
         
         encargados = {}
         for code, (cedula, nombre, cargo) in encargados_info.items():
+            cedula_num = cedula.replace("V-", "").strip()
             u = db.query(User).filter(User.cedula == cedula).first()
             if not u:
                 u = User(
                     cedula=cedula,
                     nombre_completo=nombre,
-                    password_hash=get_password_hash("gerente2026"),
+                    password_hash=get_password_hash(cedula_num),
                     rol_id=roles["ENCARGADO"].id,
                     departamento_id=depts[code].id
                 )
@@ -145,7 +150,7 @@ def seed_database():
                 db.flush()
             else:
                 u.nombre_completo = nombre
-                u.password_hash = get_password_hash("gerente2026")
+                u.password_hash = get_password_hash(cedula_num)
                 u.rol_id = roles["ENCARGADO"].id
                 u.departamento_id = depts[code].id
                 db.flush()

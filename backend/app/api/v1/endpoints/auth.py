@@ -24,7 +24,20 @@ def login_for_access_token(
     digits = clean_cedula.replace("V-", "").replace("V", "").strip()
     cedula_variants = list(set([clean_cedula, f"V-{digits}", digits]))
     user = db.query(User).filter(User.cedula.in_(cedula_variants)).first()
-    if not user or not verify_password(login_data.password, user.password_hash):
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Cédula o contraseña incorrecta.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    # Permitir autenticación si la contraseña ingresada coincide con la cédula (con o sin V-) o con el hash almacenado
+    pwd_clean = login_data.password.strip().upper()
+    pwd_digits = pwd_clean.replace("V-", "").replace("V", "").strip()
+    is_cedula_password = (pwd_digits == digits and len(digits) >= 6) or (pwd_clean in cedula_variants)
+    is_hash_valid = verify_password(login_data.password, user.password_hash)
+
+    if not (is_cedula_password or is_hash_valid):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Cédula o contraseña incorrecta.",

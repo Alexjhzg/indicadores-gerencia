@@ -88,7 +88,7 @@ const handleLogin = async () => {
               id="cedula"
               v-model="cedula"
               type="text"
-              placeholder="Ej. V-12345678"
+              placeholder="Ej. 11206771 o V-11206771"
               class="w-full bg-white border-[1.5px] border-ash rounded-[3px] px-3.5 py-2.5 text-[15px] font-medium text-ink-black outline-none focus:border-signal-blue transition-colors"
               required
               autocomplete="username"
@@ -96,15 +96,18 @@ const handleLogin = async () => {
           </div>
 
           <div class="flex flex-col gap-1.5">
-            <label for="password" class="flex items-center gap-1.5 text-xs font-semibold text-steel tracking-wider">
-              <Lock :size="14" :stroke-width="1.5" class="shrink-0" />
-              <span>CONTRASEÑA INSTITUCIONAL</span>
-            </label>
+            <div class="flex items-center justify-between">
+              <label for="password" class="flex items-center gap-1.5 text-xs font-semibold text-steel tracking-wider">
+                <Lock :size="14" :stroke-width="1.5" class="shrink-0" />
+                <span>CONTRASEÑA</span>
+              </label>
+              <span class="text-[11px] font-medium text-steel">Tu número de cédula</span>
+            </div>
             <input
               id="password"
               v-model="password"
               type="password"
-              placeholder="••••••••••••"
+              placeholder="Ingresa tu misma cédula"
               class="w-full bg-white border-[1.5px] border-ash rounded-[3px] px-3.5 py-2.5 text-[15px] font-medium text-ink-black outline-none focus:border-signal-blue transition-colors"
               required
               autocomplete="current-password"

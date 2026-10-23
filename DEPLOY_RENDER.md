@@ -127,17 +127,17 @@ Si prefieres crear los recursos manualmente desde la interfaz web de Render, sig
 
 Una vez completado el despliegue, podrás ingresar a la aplicación con los usuarios oficiales precargados en el sistema:
 
-| Rol | Cédula | Contraseña | Funcionario Responsable | Unidad Técnica |
+| Rol | Cédula | Contraseña (Su misma cédula) | Funcionario Responsable | Unidad Técnica |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gerente Estadal** | `V-11206771` | `gerente2026` | **Luis Alberto** | Gerencia Estadal Monagas (Acceso Total) |
-| **Jefe de Área** | `V-8979338` | `gerente2026` | **Jesús Ramón Pérez** | Supervisión (CART, ECO, SOC, SEG) |
-| **Jefe de Unidad** | `V-13814617` | `gerente2026` | **Wilfredo Rojas** | Estadísticas Económicas (ECO) |
-| **Jefe de Unidad** | `V-17934142` | `gerente2026` | **Rubén Alejandro** | Estadísticas Sociales (SOC) |
-| **Jefa de Unidad** | `V-11337533` | `gerente2026` | **Cledys Bastardo** | Demografía y Población (DEM) |
-| **Jefe de Unidad** | `V-10198032` | `gerente2026` | **Henri Guevara** | Cartografía Estadística (CART) |
-| **Jefa de Unidad** | `V-17723864` | `gerente2026` | **Johana Larez** | Estructura y Encuestas SEGEN (SEG) |
-| **Coordinador** | `V-20916675` | `gerente2026` | **Luis Velásquez** | Coordinación de SEEM (Seguimiento y Eval.) |
-| **Administrador** | `V-10000000` | `gerente2026` | **Administrador General** | Configuración Técnica y Auditoría |
+| **Gerente Estadal** | `V-11206771` | `11206771` o `V-11206771` | **Luis Alberto** | Gerencia Estadal Monagas (Acceso Total) |
+| **Jefe de Área** | `V-8979338` | `8979338` o `V-8979338` | **Jesús Ramón Pérez** | Supervisión (CART, ECO, SOC, SEG) |
+| **Jefe de Unidad** | `V-13814617` | `13814617` o `V-13814617` | **Wilfredo Rojas** | Estadísticas Económicas (ECO) |
+| **Jefe de Unidad** | `V-17934142` | `17934142` o `V-17934142` | **Rubén Alejandro** | Estadísticas Sociales (SOC) |
+| **Jefa de Unidad** | `V-11337533` | `11337533` o `V-11337533` | **Cledys Bastardo** | Demografía y Población (DEM) |
+| **Jefe de Unidad** | `V-10198032` | `10198032` o `V-10198032` | **Henri Guevara** | Cartografía Estadística (CART) |
+| **Jefa de Unidad** | `V-17723864` | `17723864` o `V-17723864` | **Johana Larez** | Estructura y Encuestas SEGEN (SEG) |
+| **Coordinador** | `V-20916675` | `20916675` o `V-20916675` | **Luis Velásquez** | Coordinación de SEEM (Seguimiento y Eval.) |
+| **Administrador** | `V-10000000` | `10000000` o `V-10000000` | **Administrador General** | Configuración Técnica y Auditoría |
 
 ---
 
