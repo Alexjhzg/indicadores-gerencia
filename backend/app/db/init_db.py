@@ -6,9 +6,27 @@ funciones de auditoría y triggers, y posteriormente sincroniza las semillas mae
 
 import os
 import sys
+import time
 from sqlalchemy import text
 from app.core.database import engine
 from app.db.seed_indicators import seed_database
+
+def wait_for_database(max_retries=20, delay=3):
+    """
+    Espera de forma resiliente a que el motor PostgreSQL de Render acepte conexiones.
+    """
+    print("⏳ Conectando con el motor de base de datos PostgreSQL...")
+    for attempt in range(1, max_retries + 1):
+        try:
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            print(f"✅ Conexión con PostgreSQL establecida exitosamente (intento {attempt}).")
+            return True
+        except Exception as e:
+            print(f"⚠️ Intento {attempt}/{max_retries}: Base de datos en preparación ({e}). Esperando {delay}s...")
+            time.sleep(delay)
+    print("❌ Error: No se pudo conectar a PostgreSQL tras los intentos programados.", file=sys.stderr)
+    return False
 
 def init_schema():
     print("🔍 Comprobando estado del esquema de base de datos...")
@@ -21,11 +39,11 @@ def init_schema():
         print(f"⚠️ Advertencia: No se encontró init.sql en {sql_path}")
         return
 
-    # Verificar si la tabla 'roles' ya existe
+    # Verificar si la tabla 'departamentos' ya existe
     tables_exist = False
     try:
         with engine.connect() as conn:
-            result = conn.execute(text("SELECT to_regclass('public.roles');"))
+            result = conn.execute(text("SELECT to_regclass('public.departamentos');"))
             val = result.scalar()
             if val is not None:
                 tables_exist = True
@@ -38,22 +56,20 @@ def init_schema():
             sql_content = f.read()
 
         with engine.connect() as connection:
-            raw_conn = connection.connection
-            old_autocommit = getattr(raw_conn, "autocommit", False)
-            raw_conn.autocommit = True
-            try:
-                with raw_conn.cursor() as cursor:
-                    cursor.execute(sql_content)
-                print("✅ Esquema, tablas, tipos ENUM, vistas y triggers creados exitosamente.")
-            finally:
-                raw_conn.autocommit = old_autocommit
+            dbapi_conn = connection.connection.dbapi_connection
+            with dbapi_conn.cursor() as cursor:
+                cursor.execute(sql_content)
+            dbapi_conn.commit()
+            print("✅ Esquema maestro, tablas, tipos ENUM, vistas y triggers creados y confirmados (commit).")
     else:
-        print("ℹ️ El esquema de tablas base ya existe.")
+        print("ℹ️ El esquema de tablas base ya existe y está activo.")
 
 def run_all():
     try:
+        if not wait_for_database():
+            sys.exit(1)
         init_schema()
-        print("🌱 Sincronizando catálogo de indicadores y usuarios...")
+        print("🌱 Sincronizando catálogo de indicadores y nómina oficial...")
         seed_database()
         print("🎉 Inicialización completada con éxito.")
     except Exception as e:
