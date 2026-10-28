@@ -24,8 +24,11 @@ const selectedMes = defineModel<string>('selectedMes', { default: 'Ago' });
 const activeSubprogram = ref<'TODOS' | 'EHM' | 'ESCA'>('TODOS');
 
 const currentSocData = computed(() => {
-  const key = selectedMes.value in datosSocialesPorMes ? selectedMes.value : 'Ago';
-  return datosSocialesPorMes[key];
+  const mes = selectedMes.value;
+  if (mes && mes in datosSocialesPorMes) {
+    return datosSocialesPorMes[mes];
+  }
+  return datosSocialesPorMes['Ago'] || Object.values(datosSocialesPorMes)[0];
 });
 </script>
 

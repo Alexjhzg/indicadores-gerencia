@@ -441,6 +441,7 @@ export const datosSocialesPorMes: Record<string, SocialesMesData> = {
   May: { mesNombre: 'Mayo', ehm_efec: 14, ehm_planif: 17, ehm_pct: '82.35%', ehm_viv_meta: 215, ehm_viv_efec: 123, esca_efec: 20, esca_planif: 23, esca_pct: '86.96%', esca_viv_meta: 285, esca_viv_efec: 145, no_resp: '19.5%' },
   Jun: { mesNombre: 'Junio', ehm_efec: 12, ehm_planif: 13, ehm_pct: '92.31%', ehm_viv_meta: 189, ehm_viv_efec: 101, esca_efec: 21, esca_planif: 23, esca_pct: '91.30%', esca_viv_meta: 290, esca_viv_efec: 148, no_resp: '18.2%' },
   Jul: { mesNombre: 'Julio', ehm_efec: 6, ehm_planif: 9, ehm_pct: '66.67%', ehm_viv_meta: 91, ehm_viv_efec: 59, esca_efec: 15, esca_planif: 23, esca_pct: '65.22%', esca_viv_meta: 220, esca_viv_efec: 105, no_resp: '26.1%' },
+  Ago: { mesNombre: 'Agosto', ehm_efec: 11, ehm_planif: 13, ehm_pct: '84.62%', ehm_viv_meta: 172, ehm_viv_efec: 97, esca_efec: 19, esca_planif: 23, esca_pct: '82.61%', esca_viv_meta: 287, esca_viv_efec: 139, no_resp: '20.49%' },
 };
 
 // ==========================================

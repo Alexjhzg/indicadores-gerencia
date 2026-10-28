@@ -24,7 +24,7 @@ const indicatorsStore = useIndicatorsStore();
 const authStore = useAuthStore();
 
 const searchQuery = ref('');
-const activeViewMode = ref<'CUADROS' | 'GRAFICOS'>('CUADROS');
+const activeViewMode = ref<'CUADROS' | 'GRAFICOS'>('GRAFICOS');
 const selectedMonth = ref<string>('Ago');
 const selectedSemana = ref<string>('TODAS');
 
