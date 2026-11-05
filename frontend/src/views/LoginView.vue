@@ -8,8 +8,8 @@ import LoginBackgroundAnimation from '@/components/auth/LoginBackgroundAnimation
 const router = useRouter();
 const authStore = useAuthStore();
 
-const cedula = ref('V-12345678');
-const password = ref('gerente2026');
+const cedula = ref('11206771');
+const password = ref('11206771');
 const errorMsg = ref('');
 const isSubmitting = ref(false);
 
